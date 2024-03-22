@@ -1,6 +1,7 @@
 # .gitignore file for C# projects
 bin/
 obj/
+.vs/
 *.user
 *.suo
 *.csproj.user

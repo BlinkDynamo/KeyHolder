@@ -12,49 +12,88 @@ namespace PasswordManager
 {
     public partial class Dashboard : Form
     {
-        public class UserEntry
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
-
-        private List<UserEntry> userEntries = new List<UserEntry>();
-
-        public Dashboard()
-        {
-            InitializeComponent();
-        }
-
-        private void enterPasswordB_Click(object sender, EventArgs e)
-        {
-            string username = usernameTB.Text;
-            string password = passwordTB.Text;
-
-            userEntries.Add(new UserEntry { Username = username, Password = password });
-            MessageBox.Show("User entry added successfully!");
-
-            ClearTextBoxes();
-        }
-
-        private void displayEntriesB_Click(object sender, EventArgs e)
-        {
-            DisplayUserEntries();
-        }
-
-        private void DisplayUserEntries()
-        {
-            entriesLB.Items.Clear();
-
-            foreach (var userEntry in userEntries)
-            {
-                entriesLB.Items.Add($"Username: {userEntry.Username}, Password: {userEntry.Password}");
-            }
-        }
+        List<EntryModel> entries = new List<EntryModel>();
 
         private void ClearTextBoxes()
         {
             usernameTB.Text = "";
             passwordTB.Text = "";
+            idTB.Text = "";
         }
+
+        private void LoadEntryList()
+        {
+            entries = SqliteDataAccess.LoadEntry();
+
+            WireUpEntryList();
+        }
+
+        private void WireUpEntryList()
+        {
+            entriesLB.DataSource = null;
+            entriesLB.DataSource = entries;
+            entriesLB.DisplayMember = "FullEntry";
+        }
+
+        public Dashboard()
+        {
+            InitializeComponent();
+
+            LoadEntryList();
+        }
+
+        // -------------------------------------------- CLICK EVENTS -------------------------------------------- //
+
+
+        private void addEntryB_Click(object sender, EventArgs e)
+        {
+            EntryModel entry = new EntryModel
+            {
+                ID = idTB.Text,
+                Username = usernameTB.Text,
+                Password = passwordTB.Text
+            };
+
+            System.Console.WriteLine("DEBUG: entry information (EntryModel entry) attempting to be saved is " + entry.ID + " " + entry.Username + " " + entry.Password); // DEBUG
+
+            SqliteDataAccess.SaveEntry(entry);
+            // content to database here
+
+            ClearTextBoxes();
+
+            LoadEntryList(); // refreshes entries after adding a new entry to display in list box
+        } // adds entry to database from input in ID, Username, and Password
+
+        private void refreshB_Click(object sender, EventArgs e)
+        {
+            LoadEntryList();
+        } // Refreshes list box. Mostly redundant as currently there are no actions that change data and also do not refresh the list box as well.
+
+        private void removeEntryB_Click(object sender, EventArgs e)
+        {
+            if (entriesLB.SelectedIndex != -1) // if an item is selected
+            {
+                 System.Console.WriteLine("DEBUG: entry to be removed is " + entriesLB.SelectedIndex.ToString()); // DEBUG
+
+                // Retrieve the selected entry
+                EntryModel selectedEntry = (EntryModel)entriesLB.SelectedItem;
+                   
+                // Remove the entry from the ListBox
+                entries.Remove(selectedEntry);
+
+                // Remove the entry from the SQLite database
+                SqliteDataAccess.DeleteEntry(selectedEntry); // Assuming there's a method in SqliteDataAccess to delete an entry by ID
+
+                WireUpEntryList();
+            }
+        } // Removes a selected entry from the list box and the database.
+
+        private void clearEntryB_Click(object sender, EventArgs e)
+        {
+            idTB.Text = "";
+            usernameTB.Text = "";
+            passwordTB.Text = "";
+
+        } // Clears textboxes of text in entry section.
     }
 }

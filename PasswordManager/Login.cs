@@ -8,50 +8,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PasswordManager
 {
     public partial class Login : Form
     {
-        private const string MasterPassword = "password"; // I know very creative
+        private const string MasterPassword = "password"; // placeholder
+        private const string MpasswordHint = "password";
         public Login()
         {
             InitializeComponent();
-        }
-        private void loginB_Click(object sender, EventArgs e)
-        {
-            string enteredPassword = masterPasswordTB.Text;
-
-            if (enteredPassword == MasterPassword)
-            {
-                MessageBox.Show("Login successful!");
-                OpenDashboard();
-            }
-            else
-            {
-                MessageBox.Show("Incorrect master password.");
-            }
+         
+            InitializeHints();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            string enteredPassword = masterPasswordTB.Text;
+            string enteredPassword = MpasswordTB.Text;
+            System.Console.WriteLine("DEBUG: user entered " + enteredPassword);
 
-            if (enteredPassword == MasterPassword)
+            if (enteredPassword == MasterPassword) //placeholder
             {
-                MessageBox.Show("Login successful!");
+                System.Console.WriteLine("DEBUG: the entered password was correct");
                 OpenDashboard();
             }
             else
             {
-                MessageBox.Show("Incorrect master password.");
+                System.Console.WriteLine("DEBUG: the entered password was not correct");
             }
         }
 
-        private void OpenDashboard()
+        private void createAccountButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void OpenDashboard() 
         {
             Dashboard dashboardForm = new Dashboard();
             dashboardForm.ShowDialog();
+        }
+
+        public void OpenLogin()
+        {
+            Login loginForm = new Login();
+            loginForm.ShowDialog();
+        }
+
+        public void CloseLogin()
+        {
+            Login loginForm = new Login();
+            loginForm.Close();  
+        }
+
+        // ----------------------------- GREYED OUT HINTS FOR PASSWORD AND USERNAME ----------------------------- //
+
+        private void InitializeHints() 
+        {
+            MpasswordTB.ForeColor = Color.Gray;
+            MpasswordTB.Text = MpasswordHint;
+        }
+
+        private void passwordTB_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(MpasswordTB.Text))
+            {
+                MpasswordTB.ForeColor = Color.Gray;
+                MpasswordTB.Text = MpasswordHint;
+            }
+        }
+
+        private void MpasswordTB_TextChanged(object sender, EventArgs e)
+        {
+            if (MpasswordTB.Text != MpasswordHint)
+            {
+                MpasswordTB.ForeColor = Color.Black;
+            }
+        }
+
+        private void MpasswordTB_Enter(object sender, EventArgs e)
+        {
+            if (MpasswordTB.Text == MpasswordHint)
+            {
+                MpasswordTB.Text = "";
+                MpasswordTB.ForeColor = Color.Black;
+            }
         }
     }
 }
