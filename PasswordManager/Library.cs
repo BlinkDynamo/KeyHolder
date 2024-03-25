@@ -20,4 +20,9 @@ namespace PasswordManager
             }
         }
     }
+
+    public class MasterPasswordModel
+    {
+        public string MasterPassword { get; set; }
+    }
 }

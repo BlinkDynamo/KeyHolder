@@ -1,0 +1,6 @@
+3/22/24
+
+finished having succesfully hiding the login window.
+
+started work on implementing creating a master password if no account has been created yet.
+

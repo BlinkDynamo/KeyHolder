@@ -9,57 +9,128 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Security.Cryptography;
 
 namespace PasswordManager
 {
     public partial class Login : Form
     {
-        private const string MasterPassword = "password"; // placeholder
         private const string MpasswordHint = "password";
+        bool account_exists; 
+        string enteredPassword;
+        
         public Login()
         {
             InitializeComponent();
          
             InitializeHints();
+
+            UserExists();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        public void ReadEnteredPassword()
         {
-            string enteredPassword = MpasswordTB.Text;
-            System.Console.WriteLine("DEBUG: user entered " + enteredPassword);
+            enteredPassword = HashPassword(MpasswordTB.Text); // enteredPassword is hashed text entered in 'password' tb
+            Console.WriteLine(enteredPassword);
+            //System.Console.WriteLine("DEBUG: user entered " + enteredPassword);
+        }
 
-            if (enteredPassword == MasterPassword) //placeholder
+
+        // password hashing
+
+           
+        public string HashPassword(string password)
+        {
+            SHA256 hash = SHA256.Create();
+
+            var passwordBytes = Encoding.Default.GetBytes(password);
+
+            var hashedPassword = hash.ComputeHash(passwordBytes);
+
+            var hexString = BitConverter.ToString(hashedPassword);
+
+            hexString = hexString.Replace("-", "");
+
+            return hexString;
+        }
+
+        public void UserExists()
+        {
+            var passwordlist = SqliteDataAccess.LoadMasterPassword();
+
+            account_exists = passwordlist.Count > 0; //account does exist
+
+            if (account_exists)
             {
-                System.Console.WriteLine("DEBUG: the entered password was correct");
-                OpenDashboard();
+                System.Console.WriteLine("DEBUG: An account already exists on this device."); // make into a popup window
+                createAccountButton.Enabled = false;
+                createAccountLabel.Enabled = true;
             }
             else
             {
-                System.Console.WriteLine("DEBUG: the entered password was not correct");
+                loginButton.Enabled = false;
+                createAccountLabel.Enabled = false;
             }
         }
 
-        private void createAccountButton_Click(object sender, EventArgs e)
+        public void LoginMethod()
         {
 
+            ReadEnteredPassword();
+
+            var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
+
+            if (masterpasswordlist[0].MasterPassword == enteredPassword)
+            {
+                this.Visible = false; // hide login window
+
+                //open Dashboard form
+                Dashboard dashboardForm = new Dashboard();
+                dashboardForm.ShowDialog();
+            }
+            else
+            {
+                System.Console.WriteLine("DEBUG: entered password and master password do not match");
+            }
         }
 
-        public void OpenDashboard() 
-        {
-            Dashboard dashboardForm = new Dashboard();
-            dashboardForm.ShowDialog();
+        public void RegisterMethod()
+        {          
+                ReadEnteredPassword();
+
+                MasterPasswordModel MasterPassword = new MasterPasswordModel
+                {
+                    MasterPassword = enteredPassword
+                };
+
+                SqliteDataAccess.SaveMasterPassword(MasterPassword);
+
+                account_exists = true;
+
+                Dashboard dashboardForm = new Dashboard();
+                dashboardForm.ShowDialog();
         }
 
-        public void OpenLogin()
+        //public bool UserExists()
+        //{
+            //if (MasterPassword == null) 
+           // { 
+                //return false;
+            //}
+            //return true;
+        //}
+
+        // --------------------------------------------- CLICK EVENTS --------------------------------------------- //
+
+        private void loginButton_Click(object sender, EventArgs e)
         {
-            Login loginForm = new Login();
-            loginForm.ShowDialog();
+            LoginMethod();
         }
 
-        public void CloseLogin()
+        private void createAccountButton_Click(object sender, EventArgs e) // placeholder
         {
-            Login loginForm = new Login();
-            loginForm.Close();  
+            RegisterMethod();
+
         }
 
         // ----------------------------- GREYED OUT HINTS FOR PASSWORD AND USERNAME ----------------------------- //

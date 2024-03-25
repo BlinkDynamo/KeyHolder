@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EncryptionDecryptionUsingSymmetricKey;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,6 +41,25 @@ namespace PasswordManager
             InitializeComponent();
 
             LoadEntryList();
+        }
+
+        public void EncryptEntry()
+        {
+            var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
+
+            var key = masterpasswordlist[0].MasterPassword; //hashed master password
+
+            //Console.WriteLine("Please enter a secret key for the symmetric algorithm.");
+            //var key = Console.ReadLine();
+
+            var EntryPasswordToEncrypt = passwordTB.Text;
+            var EncryptedEntryPassword = AesOperation.EncryptString(key, EntryPasswordToEncrypt);
+            Console.WriteLine($"encrypted string = {EncryptedEntryPassword}");
+
+            // var decryptedString = AesOperation.DecryptString(key, encryptedString);
+            // Console.WriteLine($"decrypted string = {decryptedString}");
+
+            Console.ReadKey();
         }
 
         // -------------------------------------------- CLICK EVENTS -------------------------------------------- //
