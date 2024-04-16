@@ -17,6 +17,7 @@ namespace PasswordManager
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<EntryModel>("select * from Entries", new DynamicParameters());
+
                 return output.ToList();
             }
         }

@@ -41,17 +41,11 @@ namespace PasswordManager
            
         public string HashPassword(string password)
         {
-            SHA256 hash = SHA256.Create();
-
-            var passwordBytes = Encoding.Default.GetBytes(password);
-
-            var hashedPassword = hash.ComputeHash(passwordBytes);
-
-            var hexString = BitConverter.ToString(hashedPassword);
-
-            hexString = hexString.Replace("-", "");
-
-            return hexString;
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hashBytes); // Convert hash to string representation
+            }
         }
 
         public void UserExists()
@@ -90,6 +84,7 @@ namespace PasswordManager
             }
             else
             {
+                System.Windows.Forms.MessageBox.Show("Entered password and master password do not match. Please try again.");
                 System.Console.WriteLine("DEBUG: entered password and master password do not match");
             }
         }

@@ -6,7 +6,7 @@ KeyHolder is a open source password management program built in visual C# using 
 
 ```C#
 
-// TODO
+This version is currently unworking. Implementing AES encryption.
 
 ```
 

@@ -1,5 +1,4 @@
-﻿using EncryptionDecryptionUsingSymmetricKey;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,37 +42,41 @@ namespace PasswordManager
             LoadEntryList();
         }
 
-        public void EncryptEntry()
-        {
-            var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
+            // var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
 
-            var key = masterpasswordlist[0].MasterPassword; //hashed master password
+           //  var key = masterpasswordlist[0].MasterPassword; // the key is the hashed master password
 
-            //Console.WriteLine("Please enter a secret key for the symmetric algorithm.");
-            //var key = Console.ReadLine();
+           //  var DecryptedEntryPassword = AesOperation.DecryptString(key, encryptedString);
 
-            var EntryPasswordToEncrypt = passwordTB.Text;
-            var EncryptedEntryPassword = AesOperation.EncryptString(key, EntryPasswordToEncrypt);
-            Console.WriteLine($"encrypted string = {EncryptedEntryPassword}");
-
-            // var decryptedString = AesOperation.DecryptString(key, encryptedString);
-            // Console.WriteLine($"decrypted string = {decryptedString}");
-
-            Console.ReadKey();
-        }
+           // Console.WriteLine($"DEBUG: decrypted string = {decryptedString}");
+        
 
         // -------------------------------------------- CLICK EVENTS -------------------------------------------- //
 
 
         private void addEntryB_Click(object sender, EventArgs e)
         {
+            //encrypts the password entered in the textbox
+
+            var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
+
+            var key = masterpasswordlist[0].MasterPassword; // the key is the hashed master password
+
+            System.Console.WriteLine("DEBUG: encryption key is " + key); // DEBUG
+
+            var EntryPasswordToEncrypt = passwordTB.Text;
+            var EncryptedEntryPassword = AesOperation.EncryptAES(key, EntryPasswordToEncrypt);
+            Console.WriteLine($"DEBUG: encrypted string = {EncryptedEntryPassword}");
+
+            //makes an new entry of EntryModel with the encrypted version of the password you entered
+
             EntryModel entry = new EntryModel
             {
                 ID = idTB.Text,
                 Username = usernameTB.Text,
-                Password = passwordTB.Text
+                Password = EncryptedEntryPassword.ToString(), // convert from byte array to string
             };
-
+            
             System.Console.WriteLine("DEBUG: entry information (EntryModel entry) attempting to be saved is " + entry.ID + " " + entry.Username + " " + entry.Password); // DEBUG
 
             SqliteDataAccess.SaveEntry(entry);
