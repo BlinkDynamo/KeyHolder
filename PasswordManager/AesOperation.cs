@@ -1,51 +1,61 @@
 ﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
 class AesOperation
-{   
-    public static byte[] EncryptAES(string plainText, string key)
+{
+    public static string EncryptString(string key, string plainText)
     {
-        using (Aes aesAlg = Aes.Create())
+        byte[] iv = new byte[16];
+        byte[] array;
+
+        using (Aes aes = Aes.Create())
         {
-            aesAlg.Key = Encoding.UTF8.GetBytes(key); // Convert hashed key string back to bytes
-            aesAlg.GenerateIV(); // Generate random IV
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.IV = iv;
 
-            ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
-            using (var msEncrypt = new System.IO.MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new System.IO.StreamWriter(csEncrypt))
+                    using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
                     {
-                        swEncrypt.Write(plainText);
+                        streamWriter.Write(plainText);
                     }
-                    return msEncrypt.ToArray();
+
+                    array = memoryStream.ToArray();
                 }
             }
         }
+
+        return Convert.ToBase64String(array);
     }
 
-    static string DecryptAES(byte[] cipherText, string key)
+    public static string DecryptString(string key, string cipherText)
     {
-        using (Aes aesAlg = Aes.Create())
+        byte[] iv = new byte[16];
+        byte[] buffer = Convert.FromBase64String(cipherText);
+
+        using (Aes aes = Aes.Create())
         {
-            aesAlg.Key = Encoding.UTF8.GetBytes(key); // Convert hashed key string back to bytes
-            aesAlg.IV = new byte[aesAlg.BlockSize / 8]; // Assume IV is at the beginning of the cipherText
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.IV = iv;
+            ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-            ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-
-            using (var msDecrypt = new System.IO.MemoryStream(cipherText))
+            using (MemoryStream memoryStream = new MemoryStream(buffer))
             {
-                using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
                 {
-                    using (var srDecrypt = new System.IO.StreamReader(csDecrypt))
+                    using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
                     {
-                        return srDecrypt.ReadToEnd();
+                        return streamReader.ReadToEnd();
                     }
                 }
             }
         }
     }
 }
+

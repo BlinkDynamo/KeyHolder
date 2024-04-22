@@ -48,7 +48,6 @@
             // listingEntriesGroupBox
             // 
             listingEntriesGroupBox.BackColor = System.Drawing.SystemColors.ControlDark;
-            listingEntriesGroupBox.BackgroundImage = global::PasswordManager.Properties.Resources.royalitems;
             listingEntriesGroupBox.Controls.Add(this.removeEntryB);
             listingEntriesGroupBox.Controls.Add(this.entriesLB);
             listingEntriesGroupBox.Controls.Add(this.refreshB);

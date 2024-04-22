@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace PasswordManager
 {
     public partial class Dashboard : Form
     {
         List<EntryModel> entries = new List<EntryModel>();
+
+        public static string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
         private void ClearTextBoxes()
         {
@@ -23,7 +26,9 @@ namespace PasswordManager
 
         private void LoadEntryList()
         {
-            entries = SqliteDataAccess.LoadEntry();
+            entries = SqliteDataAccess.LoadEntry(); // Load entries from the database. Password still encrypted.
+
+            Console.WriteLine(entries);
 
             WireUpEntryList();
         }
@@ -60,12 +65,10 @@ namespace PasswordManager
 
             var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
 
-            var key = masterpasswordlist[0].MasterPassword; // the key is the hashed master password
-
             System.Console.WriteLine("DEBUG: encryption key is " + key); // DEBUG
 
             var EntryPasswordToEncrypt = passwordTB.Text;
-            var EncryptedEntryPassword = AesOperation.EncryptAES(key, EntryPasswordToEncrypt);
+            var EncryptedEntryPassword = AesOperation.EncryptString(key, EntryPasswordToEncrypt); // encrypt the password in each entry that is submitted
             Console.WriteLine($"DEBUG: encrypted string = {EncryptedEntryPassword}");
 
             //makes an new entry of EntryModel with the encrypted version of the password you entered
@@ -79,13 +82,13 @@ namespace PasswordManager
             
             System.Console.WriteLine("DEBUG: entry information (EntryModel entry) attempting to be saved is " + entry.ID + " " + entry.Username + " " + entry.Password); // DEBUG
 
-            SqliteDataAccess.SaveEntry(entry);
             // content to database here
-
+            SqliteDataAccess.SaveEntry(entry);
+           
             ClearTextBoxes();
 
             LoadEntryList(); // refreshes entries after adding a new entry to display in list box
-        } // adds entry to database from input in ID, Username, and Password
+        } 
 
         private void refreshB_Click(object sender, EventArgs e)
         {

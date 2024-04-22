@@ -12,11 +12,12 @@ namespace PasswordManager
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public string FullEntry
+        public string FullEntry // only displayed, not ever stored to database
         {
             get
             {
-                return $"{ ID } { Username } { Password }";
+                var key = Dashboard.key;
+                return $"{ ID } { Username } { AesOperation.DecryptString(key, Password) }";
             }
         }
     }
