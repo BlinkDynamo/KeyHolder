@@ -2,13 +2,9 @@
 
 KeyHolder is a open source password management program built in visual C# using SQLite.
 
-## Usage
+## New Developments
 
-```C#
-
-This version is currently unworking. Implementing AES encryption.
-
-```
+Just recently started implementation of encryped passwords in the database. Still a long way to go. But it runs :D
 
 ## Contributing
 

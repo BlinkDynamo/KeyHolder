@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
@@ -78,9 +79,7 @@ namespace PasswordManager
             {
                 this.Visible = false; // hide login window
 
-                //open Dashboard form
-                Dashboard dashboardForm = new Dashboard();
-                dashboardForm.ShowDialog();
+                OpenDashboard();
             }
             else
             {
@@ -102,8 +101,13 @@ namespace PasswordManager
 
                 account_exists = true;
 
-                Dashboard dashboardForm = new Dashboard();
-                dashboardForm.ShowDialog();
+                OpenDashboard();
+        }
+
+        private void OpenDashboard()
+        {
+            Dashboard dashboardForm = new Dashboard();
+            dashboardForm.ShowDialog();
         }
 
         //public bool UserExists()

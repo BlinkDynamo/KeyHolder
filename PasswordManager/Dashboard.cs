@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace PasswordManager
 {
@@ -15,7 +16,7 @@ namespace PasswordManager
     {
         List<EntryModel> entries = new List<EntryModel>();
 
-        public static string key = "b14ca5898a4e4133bbce2ea2315a1916";
+        public static string key = "b14ca5898a4e4133bbce2ea2315a1916";      // randomize this later cryptographically
 
         private void ClearTextBoxes()
         {
@@ -45,16 +46,9 @@ namespace PasswordManager
             InitializeComponent();
 
             LoadEntryList();
+
+            this.FormClosing += Dashboard_FormClosing;      // associates the event handler with the FormClosing event.
         }
-
-            // var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
-
-           //  var key = masterpasswordlist[0].MasterPassword; // the key is the hashed master password
-
-           //  var DecryptedEntryPassword = AesOperation.DecryptString(key, encryptedString);
-
-           // Console.WriteLine($"DEBUG: decrypted string = {decryptedString}");
-        
 
         // -------------------------------------------- CLICK EVENTS -------------------------------------------- //
 
@@ -121,5 +115,10 @@ namespace PasswordManager
             passwordTB.Text = "";
 
         } // Clears textboxes of text in entry section.
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e) // Closes both forms and ends the program when the dashboard is closed.
+        {
+            Application.Exit();
+        } 
     }
 }
