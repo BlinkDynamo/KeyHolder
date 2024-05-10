@@ -50,20 +50,22 @@ namespace PasswordManager
             this.FormClosing += Dashboard_FormClosing;      // associates the event handler with the FormClosing event.
         }
 
-        // -------------------------------------------- CLICK EVENTS -------------------------------------------- //
+        // -------------------------------------------- CLICK EVENTS: DASHBOARD -------------------------------------------- //
 
 
         private void addEntryB_Click(object sender, EventArgs e)
         {
+            if (idTB.Text == "" || usernameTB.Text == "" || passwordTB.Text == "")
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
             //encrypts the password entered in the textbox
 
             var masterpasswordlist = SqliteDataAccess.LoadMasterPassword();
 
-            System.Console.WriteLine("DEBUG: encryption key is " + key); // DEBUG
-
             var EntryPasswordToEncrypt = passwordTB.Text;
             var EncryptedEntryPassword = AesOperation.EncryptString(key, EntryPasswordToEncrypt); // encrypt the password in each entry that is submitted
-            Console.WriteLine($"DEBUG: encrypted string = {EncryptedEntryPassword}");
 
             //makes an new entry of EntryModel with the encrypted version of the password you entered
 
@@ -74,8 +76,6 @@ namespace PasswordManager
                 Password = EncryptedEntryPassword.ToString(), // convert from byte array to string
             };
             
-            System.Console.WriteLine("DEBUG: entry information (EntryModel entry) attempting to be saved is " + entry.ID + " " + entry.Username + " " + entry.Password); // DEBUG
-
             // content to database here
             SqliteDataAccess.SaveEntry(entry);
            
@@ -119,6 +119,13 @@ namespace PasswordManager
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e) // Closes both forms and ends the program when the dashboard is closed.
         {
             Application.Exit();
-        } 
+        }
+
+        private void settingsB_Click(object sender, EventArgs e)
+        {
+            // change tab to settings tab
+        }
+
+        // -------------------------------------------- CLICK EVENTS: SETTINGS -------------------------------------------- //
     }
 }

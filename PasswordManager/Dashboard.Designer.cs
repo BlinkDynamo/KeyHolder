@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.GroupBox listingEntriesGroupBox;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+            this.settingsB = new System.Windows.Forms.Button();
             this.removeEntryB = new System.Windows.Forms.Button();
             this.entriesLB = new System.Windows.Forms.ListBox();
             this.refreshB = new System.Windows.Forms.Button();
@@ -48,6 +49,7 @@
             // listingEntriesGroupBox
             // 
             listingEntriesGroupBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            listingEntriesGroupBox.Controls.Add(this.settingsB);
             listingEntriesGroupBox.Controls.Add(this.removeEntryB);
             listingEntriesGroupBox.Controls.Add(this.entriesLB);
             listingEntriesGroupBox.Controls.Add(this.refreshB);
@@ -57,6 +59,16 @@
             listingEntriesGroupBox.TabIndex = 14;
             listingEntriesGroupBox.TabStop = false;
             listingEntriesGroupBox.Text = "Entries";
+            // 
+            // settingsB
+            // 
+            this.settingsB.Location = new System.Drawing.Point(574, 268);
+            this.settingsB.Name = "settingsB";
+            this.settingsB.Size = new System.Drawing.Size(70, 28);
+            this.settingsB.TabIndex = 15;
+            this.settingsB.Text = "Settings";
+            this.settingsB.UseVisualStyleBackColor = true;
+            this.settingsB.Click += new System.EventHandler(this.settingsB_Click);
             // 
             // removeEntryB
             // 
@@ -71,10 +83,12 @@
             // entriesLB
             // 
             this.entriesLB.BackColor = System.Drawing.SystemColors.Window;
+            this.entriesLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.entriesLB.FormattingEnabled = true;
-            this.entriesLB.Location = new System.Drawing.Point(12, 19);
+            this.entriesLB.ItemHeight = 15;
+            this.entriesLB.Location = new System.Drawing.Point(12, 45);
             this.entriesLB.Name = "entriesLB";
-            this.entriesLB.Size = new System.Drawing.Size(546, 277);
+            this.entriesLB.Size = new System.Drawing.Size(546, 244);
             this.entriesLB.TabIndex = 8;
             // 
             // refreshB
@@ -194,5 +208,6 @@
         private System.Windows.Forms.Button clearEntryB;
         private System.Windows.Forms.Button refreshB;
         private System.Windows.Forms.Button removeEntryB;
+        private System.Windows.Forms.Button settingsB;
     }
 }

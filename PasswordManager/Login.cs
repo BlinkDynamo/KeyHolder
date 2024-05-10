@@ -32,14 +32,9 @@ namespace PasswordManager
         public void ReadEnteredPassword()
         {
             enteredPassword = HashPassword(MpasswordTB.Text); // enteredPassword is hashed text entered in 'password' tb
-            Console.WriteLine(enteredPassword);
-            //System.Console.WriteLine("DEBUG: user entered " + enteredPassword);
         }
 
-
-        // password hashing
-
-           
+        // password hashing         
         public string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -57,7 +52,6 @@ namespace PasswordManager
 
             if (account_exists)
             {
-                System.Console.WriteLine("DEBUG: An account already exists on this device."); // make into a popup window
                 createAccountButton.Enabled = false;
                 createAccountLabel.Enabled = true;
             }
@@ -110,15 +104,6 @@ namespace PasswordManager
             dashboardForm.ShowDialog();
         }
 
-        //public bool UserExists()
-        //{
-            //if (MasterPassword == null) 
-           // { 
-                //return false;
-            //}
-            //return true;
-        //}
-
         // --------------------------------------------- CLICK EVENTS --------------------------------------------- //
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -129,7 +114,6 @@ namespace PasswordManager
         private void createAccountButton_Click(object sender, EventArgs e) // placeholder
         {
             RegisterMethod();
-
         }
 
         // ----------------------------- GREYED OUT HINTS FOR PASSWORD AND USERNAME ----------------------------- //

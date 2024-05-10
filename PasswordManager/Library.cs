@@ -16,8 +16,9 @@ namespace PasswordManager
         {
             get
             {
+                // fetches the AES key from the Dashboard class, then uses it to decrypt the password and display a full entry in the listbox.
                 var key = Dashboard.key;
-                return $"{ ID } { Username } { AesOperation.DecryptString(key, Password) }";
+                return $"[ { ID } ]   { Username } -- { AesOperation.DecryptString(key, Password) }";
             }
         }
     }
