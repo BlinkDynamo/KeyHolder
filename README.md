@@ -4,7 +4,8 @@ KeyHolder is a open source password management program built in visual C# using 
 
 ## New Developments
 
-Just recently started implementation of encryped passwords in the database. Still a long way to go. But it runs :D
+Added a Notes and Settings page. Want this project to be more of a fun, secret place for notes and passwords
+rather than a strictly serious password manager.
 
 ## Contributing
 

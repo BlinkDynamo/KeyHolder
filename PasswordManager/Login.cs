@@ -22,6 +22,9 @@ namespace PasswordManager
         
         public Login()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // disable resizing
+            this.StartPosition = FormStartPosition.CenterScreen; // center the form on the screen
+
             InitializeComponent();
          
             InitializeHints();

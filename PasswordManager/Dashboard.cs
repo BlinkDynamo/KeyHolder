@@ -43,6 +43,9 @@ namespace PasswordManager
 
         public Dashboard()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // disable resizing
+            this.StartPosition = FormStartPosition.CenterScreen; // center the form on the screen
+
             InitializeComponent();
 
             LoadEntryList();
@@ -119,11 +122,6 @@ namespace PasswordManager
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e) // Closes both forms and ends the program when the dashboard is closed.
         {
             Application.Exit();
-        }
-
-        private void settingsB_Click(object sender, EventArgs e)
-        {
-            // change tab to settings tab
         }
 
         // -------------------------------------------- CLICK EVENTS: SETTINGS -------------------------------------------- //

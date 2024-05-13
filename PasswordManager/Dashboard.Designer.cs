@@ -28,57 +28,115 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.GroupBox listingEntriesGroupBox;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            this.settingsB = new System.Windows.Forms.Button();
-            this.removeEntryB = new System.Windows.Forms.Button();
-            this.entriesLB = new System.Windows.Forms.ListBox();
-            this.refreshB = new System.Windows.Forms.Button();
-            this.addEntryB = new System.Windows.Forms.Button();
-            this.usernameTB = new System.Windows.Forms.TextBox();
-            this.usernameEntryL = new System.Windows.Forms.Label();
-            this.passwordEntryL = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage = new System.Windows.Forms.TabPage();
             this.passwordTB = new System.Windows.Forms.TextBox();
+            this.passwordEntryL = new System.Windows.Forms.Label();
+            this.addEntryB = new System.Windows.Forms.Button();
+            this.usernameEntryL = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.refreshB = new System.Windows.Forms.Button();
+            this.entriesLB = new System.Windows.Forms.ListBox();
+            this.usernameTB = new System.Windows.Forms.TextBox();
+            this.removeEntryB = new System.Windows.Forms.Button();
             this.idTB = new System.Windows.Forms.TextBox();
             this.clearEntryB = new System.Windows.Forms.Button();
-            listingEntriesGroupBox = new System.Windows.Forms.GroupBox();
-            listingEntriesGroupBox.SuspendLayout();
+            this.mainMenuTP = new System.Windows.Forms.TabControl();
+            this.settingsTP = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tabPage.SuspendLayout();
+            this.mainMenuTP.SuspendLayout();
+            this.settingsTP.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listingEntriesGroupBox
+            // tabPage1
             // 
-            listingEntriesGroupBox.BackColor = System.Drawing.SystemColors.ControlDark;
-            listingEntriesGroupBox.Controls.Add(this.settingsB);
-            listingEntriesGroupBox.Controls.Add(this.removeEntryB);
-            listingEntriesGroupBox.Controls.Add(this.entriesLB);
-            listingEntriesGroupBox.Controls.Add(this.refreshB);
-            listingEntriesGroupBox.Location = new System.Drawing.Point(0, 77);
-            listingEntriesGroupBox.Name = "listingEntriesGroupBox";
-            listingEntriesGroupBox.Size = new System.Drawing.Size(655, 316);
-            listingEntriesGroupBox.TabIndex = 14;
-            listingEntriesGroupBox.TabStop = false;
-            listingEntriesGroupBox.Text = "Entries";
+            this.tabPage1.BackColor = System.Drawing.Color.Silver;
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(655, 397);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Settings";
             // 
-            // settingsB
+            // tabPage
             // 
-            this.settingsB.Location = new System.Drawing.Point(574, 268);
-            this.settingsB.Name = "settingsB";
-            this.settingsB.Size = new System.Drawing.Size(70, 28);
-            this.settingsB.TabIndex = 15;
-            this.settingsB.Text = "Settings";
-            this.settingsB.UseVisualStyleBackColor = true;
-            this.settingsB.Click += new System.EventHandler(this.settingsB_Click);
+            this.tabPage.BackColor = System.Drawing.Color.Silver;
+            this.tabPage.Controls.Add(this.clearEntryB);
+            this.tabPage.Controls.Add(this.idTB);
+            this.tabPage.Controls.Add(this.usernameTB);
+            this.tabPage.Controls.Add(this.passwordTB);
+            this.tabPage.Controls.Add(this.removeEntryB);
+            this.tabPage.Controls.Add(this.entriesLB);
+            this.tabPage.Controls.Add(this.refreshB);
+            this.tabPage.Controls.Add(this.label2);
+            this.tabPage.Controls.Add(this.usernameEntryL);
+            this.tabPage.Controls.Add(this.addEntryB);
+            this.tabPage.Controls.Add(this.passwordEntryL);
+            this.tabPage.Location = new System.Drawing.Point(4, 22);
+            this.tabPage.Name = "tabPage";
+            this.tabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage.Size = new System.Drawing.Size(659, 397);
+            this.tabPage.TabIndex = 0;
+            this.tabPage.Text = "Passwords";
             // 
-            // removeEntryB
+            // passwordTB
             // 
-            this.removeEntryB.Location = new System.Drawing.Point(574, 53);
-            this.removeEntryB.Name = "removeEntryB";
-            this.removeEntryB.Size = new System.Drawing.Size(70, 28);
-            this.removeEntryB.TabIndex = 14;
-            this.removeEntryB.Text = "Remove";
-            this.removeEntryB.UseVisualStyleBackColor = true;
-            this.removeEntryB.Click += new System.EventHandler(this.removeEntryB_Click);
+            this.passwordTB.Location = new System.Drawing.Point(393, 34);
+            this.passwordTB.Name = "passwordTB";
+            this.passwordTB.Size = new System.Drawing.Size(166, 20);
+            this.passwordTB.TabIndex = 7;
+            // 
+            // passwordEntryL
+            // 
+            this.passwordEntryL.AutoSize = true;
+            this.passwordEntryL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.passwordEntryL.Location = new System.Drawing.Point(447, 13);
+            this.passwordEntryL.Name = "passwordEntryL";
+            this.passwordEntryL.Size = new System.Drawing.Size(73, 17);
+            this.passwordEntryL.TabIndex = 6;
+            this.passwordEntryL.Text = "Password:";
+            // 
+            // addEntryB
+            // 
+            this.addEntryB.Location = new System.Drawing.Point(576, 30);
+            this.addEntryB.Name = "addEntryB";
+            this.addEntryB.Size = new System.Drawing.Size(68, 27);
+            this.addEntryB.TabIndex = 1;
+            this.addEntryB.Text = "Add Entry";
+            this.addEntryB.UseVisualStyleBackColor = true;
+            this.addEntryB.Click += new System.EventHandler(this.addEntryB_Click);
+            // 
+            // usernameEntryL
+            // 
+            this.usernameEntryL.AutoSize = true;
+            this.usernameEntryL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.usernameEntryL.Location = new System.Drawing.Point(241, 13);
+            this.usernameEntryL.Name = "usernameEntryL";
+            this.usernameEntryL.Size = new System.Drawing.Size(77, 17);
+            this.usernameEntryL.TabIndex = 4;
+            this.usernameEntryL.Text = "Username:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Location = new System.Drawing.Point(60, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 17);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "ID (Name):";
+            // 
+            // refreshB
+            // 
+            this.refreshB.Location = new System.Drawing.Point(576, 163);
+            this.refreshB.Name = "refreshB";
+            this.refreshB.Size = new System.Drawing.Size(68, 28);
+            this.refreshB.TabIndex = 13;
+            this.refreshB.Text = "Refresh";
+            this.refreshB.UseVisualStyleBackColor = true;
+            this.refreshB.Click += new System.EventHandler(this.refreshB_Click);
             // 
             // entriesLB
             // 
@@ -86,85 +144,38 @@
             this.entriesLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.entriesLB.FormattingEnabled = true;
             this.entriesLB.ItemHeight = 15;
-            this.entriesLB.Location = new System.Drawing.Point(12, 45);
+            this.entriesLB.Location = new System.Drawing.Point(13, 65);
             this.entriesLB.Name = "entriesLB";
-            this.entriesLB.Size = new System.Drawing.Size(546, 244);
+            this.entriesLB.Size = new System.Drawing.Size(546, 319);
             this.entriesLB.TabIndex = 8;
-            // 
-            // refreshB
-            // 
-            this.refreshB.Location = new System.Drawing.Point(575, 19);
-            this.refreshB.Name = "refreshB";
-            this.refreshB.Size = new System.Drawing.Size(69, 28);
-            this.refreshB.TabIndex = 13;
-            this.refreshB.Text = "Refresh";
-            this.refreshB.UseVisualStyleBackColor = true;
-            this.refreshB.Click += new System.EventHandler(this.refreshB_Click);
-            // 
-            // addEntryB
-            // 
-            this.addEntryB.Location = new System.Drawing.Point(575, 12);
-            this.addEntryB.Name = "addEntryB";
-            this.addEntryB.Size = new System.Drawing.Size(69, 27);
-            this.addEntryB.TabIndex = 1;
-            this.addEntryB.Text = "Add Entry";
-            this.addEntryB.UseVisualStyleBackColor = true;
-            this.addEntryB.Click += new System.EventHandler(this.addEntryB_Click);
             // 
             // usernameTB
             // 
-            this.usernameTB.Location = new System.Drawing.Point(203, 32);
+            this.usernameTB.Location = new System.Drawing.Point(201, 34);
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(166, 20);
             this.usernameTB.TabIndex = 2;
             // 
-            // usernameEntryL
+            // removeEntryB
             // 
-            this.usernameEntryL.AutoSize = true;
-            this.usernameEntryL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.usernameEntryL.Location = new System.Drawing.Point(249, 11);
-            this.usernameEntryL.Name = "usernameEntryL";
-            this.usernameEntryL.Size = new System.Drawing.Size(77, 17);
-            this.usernameEntryL.TabIndex = 4;
-            this.usernameEntryL.Text = "Username:";
-            // 
-            // passwordEntryL
-            // 
-            this.passwordEntryL.AutoSize = true;
-            this.passwordEntryL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.passwordEntryL.Location = new System.Drawing.Point(443, 11);
-            this.passwordEntryL.Name = "passwordEntryL";
-            this.passwordEntryL.Size = new System.Drawing.Size(73, 17);
-            this.passwordEntryL.TabIndex = 6;
-            this.passwordEntryL.Text = "Password:";
-            // 
-            // passwordTB
-            // 
-            this.passwordTB.Location = new System.Drawing.Point(392, 32);
-            this.passwordTB.Name = "passwordTB";
-            this.passwordTB.Size = new System.Drawing.Size(166, 20);
-            this.passwordTB.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(56, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "ID (Name):";
+            this.removeEntryB.Location = new System.Drawing.Point(576, 249);
+            this.removeEntryB.Name = "removeEntryB";
+            this.removeEntryB.Size = new System.Drawing.Size(68, 28);
+            this.removeEntryB.TabIndex = 14;
+            this.removeEntryB.Text = "Remove";
+            this.removeEntryB.UseVisualStyleBackColor = true;
+            this.removeEntryB.Click += new System.EventHandler(this.removeEntryB_Click);
             // 
             // idTB
             // 
-            this.idTB.Location = new System.Drawing.Point(12, 32);
+            this.idTB.Location = new System.Drawing.Point(13, 34);
             this.idTB.Name = "idTB";
             this.idTB.Size = new System.Drawing.Size(166, 20);
             this.idTB.TabIndex = 10;
             // 
             // clearEntryB
             // 
-            this.clearEntryB.Location = new System.Drawing.Point(575, 45);
+            this.clearEntryB.Location = new System.Drawing.Point(576, 208);
             this.clearEntryB.Name = "clearEntryB";
             this.clearEntryB.Size = new System.Drawing.Size(69, 26);
             this.clearEntryB.TabIndex = 12;
@@ -172,42 +183,71 @@
             this.clearEntryB.UseVisualStyleBackColor = true;
             this.clearEntryB.Click += new System.EventHandler(this.clearEntryB_Click);
             // 
+            // mainMenuTP
+            // 
+            this.mainMenuTP.Controls.Add(this.tabPage);
+            this.mainMenuTP.Controls.Add(this.settingsTP);
+            this.mainMenuTP.Controls.Add(this.tabPage1);
+            this.mainMenuTP.Location = new System.Drawing.Point(8, 9);
+            this.mainMenuTP.Name = "mainMenuTP";
+            this.mainMenuTP.SelectedIndex = 0;
+            this.mainMenuTP.Size = new System.Drawing.Size(667, 423);
+            this.mainMenuTP.TabIndex = 16;
+            // 
+            // settingsTP
+            // 
+            this.settingsTP.BackColor = System.Drawing.Color.Silver;
+            this.settingsTP.Controls.Add(this.richTextBox1);
+            this.settingsTP.Location = new System.Drawing.Point(4, 22);
+            this.settingsTP.Name = "settingsTP";
+            this.settingsTP.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsTP.Size = new System.Drawing.Size(659, 397);
+            this.settingsTP.TabIndex = 1;
+            this.settingsTP.Text = "Notes";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(6, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(647, 385);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(656, 393);
-            this.Controls.Add(listingEntriesGroupBox);
-            this.Controls.Add(this.clearEntryB);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.idTB);
-            this.Controls.Add(this.passwordTB);
-            this.Controls.Add(this.passwordEntryL);
-            this.Controls.Add(this.usernameEntryL);
-            this.Controls.Add(this.usernameTB);
-            this.Controls.Add(this.addEntryB);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(683, 440);
+            this.Controls.Add(this.mainMenuTP);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Dashboard";
             this.Text = "KeyHolder - Dashboard";
-            listingEntriesGroupBox.ResumeLayout(false);
+            this.tabPage.ResumeLayout(false);
+            this.tabPage.PerformLayout();
+            this.mainMenuTP.ResumeLayout(false);
+            this.settingsTP.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button addEntryB;
-        private System.Windows.Forms.TextBox usernameTB;
-        private System.Windows.Forms.Label usernameEntryL;
-        private System.Windows.Forms.Label passwordEntryL;
-        private System.Windows.Forms.TextBox passwordTB;
-        private System.Windows.Forms.ListBox entriesLB;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox idTB;
+
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage;
         private System.Windows.Forms.Button clearEntryB;
-        private System.Windows.Forms.Button refreshB;
+        private System.Windows.Forms.TextBox idTB;
+        private System.Windows.Forms.TextBox usernameTB;
+        private System.Windows.Forms.TextBox passwordTB;
         private System.Windows.Forms.Button removeEntryB;
-        private System.Windows.Forms.Button settingsB;
+        private System.Windows.Forms.ListBox entriesLB;
+        private System.Windows.Forms.Button refreshB;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label usernameEntryL;
+        private System.Windows.Forms.Button addEntryB;
+        private System.Windows.Forms.Label passwordEntryL;
+        private System.Windows.Forms.TabControl mainMenuTP;
+        private System.Windows.Forms.TabPage settingsTP;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

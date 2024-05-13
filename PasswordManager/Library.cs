@@ -27,4 +27,15 @@ namespace PasswordManager
     {
         public string MasterPassword { get; set; }
     }
+
+    public class Notes
+    {
+        public string NotesText { get; set; }
+    }
+
+    public class SettingsModel
+    {
+        public int FontSize { get; set; }
+        public string FontName { get; set; }
+    }
 }
