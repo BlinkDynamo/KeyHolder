@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PasswordManager
+namespace KeyHolder
 {
     public partial class Dashboard : Form
     {
@@ -39,6 +39,8 @@ namespace PasswordManager
         public Dashboard()
         {
             InitializeComponent();
+
+            FormBorderStyle = FormBorderStyle.FixedSingle; // disable resizing
 
             LoadEntryList();
         }
@@ -117,3 +119,4 @@ namespace PasswordManager
         } // Clears textboxes of text in entry section.
     }
 }
+

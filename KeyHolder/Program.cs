@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 
 
-namespace PasswordManager
+namespace KeyHolder
 {
     static class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace PasswordManager
+﻿namespace KeyHolder
 {
     partial class Login
     {

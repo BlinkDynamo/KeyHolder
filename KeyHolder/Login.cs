@@ -1,4 +1,4 @@
-﻿using PasswordManager;
+﻿using KeyHolder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,18 +11,20 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
 
-namespace PasswordManager
+namespace KeyHolder
 {
     public partial class Login : Form
     {
         private const string MpasswordHint = "password";
-        bool account_exists; 
+        bool accountExists; 
         string enteredPassword;
         
         public Login()
         {
             InitializeComponent();
          
+            FormBorderStyle = FormBorderStyle.FixedSingle; // disable resizing
+
             InitializeHints();
 
             UserExists();
@@ -32,13 +34,10 @@ namespace PasswordManager
         {
             enteredPassword = HashPassword(MpasswordTB.Text); // enteredPassword is hashed text entered in 'password' tb
             Console.WriteLine(enteredPassword);
-            //System.Console.WriteLine("DEBUG: user entered " + enteredPassword);
         }
 
 
-        // password hashing
-
-           
+        // password hashing     
         public string HashPassword(string password)
         {
             SHA256 hash = SHA256.Create();
@@ -58,9 +57,9 @@ namespace PasswordManager
         {
             var passwordlist = SqliteDataAccess.LoadMasterPassword();
 
-            account_exists = passwordlist.Count > 0; //account does exist
+            accountExists = passwordlist.Count > 0; //account does exist
 
-            if (account_exists)
+            if (accountExists)
             {
                 System.Console.WriteLine("DEBUG: An account already exists on this device."); // make into a popup window
                 createAccountButton.Enabled = false;
@@ -105,20 +104,11 @@ namespace PasswordManager
 
                 SqliteDataAccess.SaveMasterPassword(MasterPassword);
 
-                account_exists = true;
+                accountExists = true;
 
                 Dashboard dashboardForm = new Dashboard();
                 dashboardForm.ShowDialog();
         }
-
-        //public bool UserExists()
-        //{
-            //if (MasterPassword == null) 
-           // { 
-                //return false;
-            //}
-            //return true;
-        //}
 
         // --------------------------------------------- CLICK EVENTS --------------------------------------------- //
 
