@@ -36,11 +36,14 @@ namespace KeyHolder
             entriesLB.DisplayMember = "FullEntry";
         }
 
+        /* constructor */
         public Dashboard()
         {
             InitializeComponent();
 
             FormBorderStyle = FormBorderStyle.FixedSingle; // disable resizing
+
+            this.FormClosing += new FormClosingEventHandler(Dashboard_FormClosing); // close application when form is closed
 
             LoadEntryList();
         }
@@ -66,7 +69,7 @@ namespace KeyHolder
 
         // -------------------------------------------- CLICK EVENTS -------------------------------------------- //
 
-
+        // adds entry to database from input in ID, Username, and Password
         private void addEntryB_Click(object sender, EventArgs e)
         {
             EntryModel entry = new EntryModel
@@ -78,33 +81,34 @@ namespace KeyHolder
 
             System.Console.WriteLine("DEBUG: entry information (EntryModel entry) attempting to be saved is " + entry.ID + " " + entry.Username + " " + entry.Password); // DEBUG
 
-            SqliteDataAccess.SaveEntry(entry);
             // content to database here
-
+            SqliteDataAccess.SaveEntry(entry);
+            
             ClearTextBoxes();
 
             LoadEntryList(); // refreshes entries after adding a new entry to display in list box
-        } // adds entry to database from input in ID, Username, and Password
+        } 
 
         private void refreshB_Click(object sender, EventArgs e)
         {
+            // Refreshes list box. Mostly redundant as currently there are no actions that change data and also do not refresh the list box as well.
             LoadEntryList();
-        } // Refreshes list box. Mostly redundant as currently there are no actions that change data and also do not refresh the list box as well.
+        } 
 
         private void removeEntryB_Click(object sender, EventArgs e)
         {
             if (entriesLB.SelectedIndex != -1) // if an item is selected
             {
-                 System.Console.WriteLine("DEBUG: entry to be removed is " + entriesLB.SelectedIndex.ToString()); // DEBUG
+                System.Console.WriteLine("DEBUG: entry to be removed is " + entriesLB.SelectedIndex.ToString()); // DEBUG
 
                 // Retrieve the selected entry
                 EntryModel selectedEntry = (EntryModel)entriesLB.SelectedItem;
-                   
+
                 // Remove the entry from the ListBox
                 entries.Remove(selectedEntry);
 
-                // Remove the entry from the SQLite database
-                SqliteDataAccess.DeleteEntry(selectedEntry); // Assuming there's a method in SqliteDataAccess to delete an entry by ID
+                // Remove the entry from the database
+                SqliteDataAccess.DeleteEntry(selectedEntry); 
 
                 WireUpEntryList();
             }
@@ -112,11 +116,18 @@ namespace KeyHolder
 
         private void clearEntryB_Click(object sender, EventArgs e)
         {
+            // Clears textboxes of text in entry section.
             idTB.Text = "";
             usernameTB.Text = "";
             passwordTB.Text = "";
 
-        } // Clears textboxes of text in entry section.
+        }
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Close the application when form is closed
+            Application.Exit();
+        }
     }
 }
 
