@@ -8,8 +8,6 @@ namespace KeyHolder
 {
    public class EntryModel
     {
-        /* each of these individual properties are for dealing directly with the database,
-         * whereas the FullEntry property is for displaying the full entry in the listbox */
         public string ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -22,6 +20,7 @@ namespace KeyHolder
             }
         }
     }
+
     public class MasterPasswordModel
     {
         public string MasterPassword { get; set; }
