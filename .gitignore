@@ -1,0 +1,9 @@
+# .gitignore file for C# projects
+bin/
+obj/
+.vs/
+.vsss/
+*.user
+*.suo
+*.csproj.user
+*.sln.docstates
