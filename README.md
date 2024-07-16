@@ -1,5 +1,5 @@
 
-# ![alt text](images/KeyHolderIcon.png "KeyHolder Logo")
+# ![alt text](img/KeyHolderIcon.png "KeyHolder Logo")
 ## KeyHolder - Password Manager
 
 KeyHolder is very bare-bones password and account management software built in visual C# using 
